@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rakshatha Murching — Product Marketing Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F2044;
+    --blue: #1B4F8A;
+    --accent: #C8943A;
+    --text: #1A1A2E;
+    --muted: #6B7280;
+    --light: #F7F8FA;
+    --border: #E4E7ED;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 56px;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px; color: var(--navy); letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    text-decoration: none; color: var(--muted); font-size: 13px;
+    font-weight: 400; letter-spacing: 0.03em; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+
+  /* HERO */
+  .hero {
+    padding: 120px 48px 72px;
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 64px;
+    max-width: 1100px;
+    margin: 0 auto;
+    align-items: end;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--accent);
+    margin-bottom: 16px;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 64px);
+    line-height: 1.1; color: var(--navy);
+    margin-bottom: 20px;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+
+  .hero-name em { font-style: italic; color: var(--blue); }
+
+  .hero-desc {
+    font-size: 16px; color: var(--muted); line-height: 1.75;
+    max-width: 520px; font-weight: 300;
+    opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
+  }
+
+  .hero-cta {
+    display: flex; gap: 12px; margin-top: 32px;
+    opacity: 0; animation: fadeUp 0.6s 0.4s forwards;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 4px;
+    font-size: 13px; font-weight: 500; text-decoration: none;
+    letter-spacing: 0.02em; transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--navy); color: var(--white);
+  }
+  .btn-primary:hover { background: var(--blue); }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--navy);
+  }
+  .btn-outline:hover { border-color: var(--navy); }
+
+  .hero-card {
+    background: var(--light); border-radius: 12px;
+    padding: 28px; border: 1px solid var(--border);
+    opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
+  }
+  .hero-card-label {
+    font-size: 10px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
+  }
+  .stat-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-bottom: 20px;
+  }
+  .stat { text-align: center; padding: 16px 8px; background: var(--white); border-radius: 8px; border: 1px solid var(--border); }
+  .stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--navy); font-weight: 600;
+  }
+  .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 3px; }
+  .tag-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px; padding: 4px 10px; border-radius: 20px;
+    background: var(--white); border: 1px solid var(--border);
+    color: var(--navy); font-weight: 400;
+  }
+
+  /* DIVIDER */
+  .divider {
+    max-width: 1100px; margin: 0 auto;
+    border: none; border-top: 1px solid var(--border);
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px; margin: 0 auto;
+    padding: 60px 48px;
+  }
+
+  .section-header {
+    display: flex; align-items: baseline; gap: 16px;
+    margin-bottom: 36px;
+  }
+  .section-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px; color: var(--accent); font-style: italic;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; color: var(--navy); font-weight: 400;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+  }
+  .about-text p {
+    font-size: 15px; color: var(--muted); line-height: 1.8;
+    margin-bottom: 16px; font-weight: 300;
+  }
+  .about-text p strong { color: var(--navy); font-weight: 500; }
+  .about-highlights { display: flex; flex-direction: column; gap: 12px; }
+  .highlight-row {
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 14px 16px; background: var(--light); border-radius: 8px;
+    border-left: 3px solid var(--blue);
+  }
+  .highlight-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .highlight-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+  .highlight-text strong { display: block; font-weight: 500; margin-bottom: 2px; }
+
+  /* EXPERIENCE */
+  .exp-grid { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid; grid-template-columns: 180px 1fr;
+    gap: 32px; padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0; transform: translateY(16px);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .exp-item.visible { opacity: 1; transform: translateY(0); }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-dates {
+    font-size: 12px; color: var(--muted); font-weight: 400;
+    padding-top: 4px; line-height: 1.6;
+  }
+  .exp-dates strong { display: block; color: var(--navy); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 4px; }
+  .exp-role {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; color: var(--navy); margin-bottom: 2px;
+  }
+  .exp-company {
+    font-size: 13px; color: var(--blue); font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+  .exp-bullets li {
+    font-size: 13px; color: var(--muted); line-height: 1.6;
+    padding-left: 14px; position: relative; font-weight: 300;
+  }
+  .exp-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--accent); font-size: 11px; top: 3px;
+  }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .skill-card {
+    padding: 20px; background: var(--light);
+    border-radius: 10px; border: 1px solid var(--border);
+  }
+  .skill-card-title {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 10px;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-tag {
+    font-size: 12px; padding: 3px 9px; border-radius: 4px;
+    background: var(--white); border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  /* ACHIEVEMENTS */
+  .ach-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .ach-card {
+    padding: 24px; border-radius: 10px;
+    border: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .ach-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 3px; background: var(--blue);
+  }
+  .ach-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; color: var(--navy); font-weight: 600;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .ach-val span { font-size: 18px; }
+  .ach-desc { font-size: 13px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* OLIVER FIT */
+  .oliver-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+    align-items: start;
+  }
+  .oliver-left p {
+    font-size: 15px; color: var(--muted); line-height: 1.8;
+    margin-bottom: 16px; font-weight: 300;
+  }
+  .fit-list { display: flex; flex-direction: column; gap: 10px; }
+  .fit-item {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px;
+  }
+  .fit-check {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--navy); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; flex-shrink: 0; margin-top: 1px;
+  }
+  .fit-content strong { display: block; font-size: 13px; color: var(--navy); margin-bottom: 2px; }
+  .fit-content span { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+  /* CONTACT */
+  .contact-bar {
+    background: var(--navy); padding: 48px;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 24px; flex-wrap: wrap;
+  }
+  .contact-left { }
+  .contact-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; color: var(--white); font-weight: 400;
+    margin-bottom: 8px;
+  }
+  .contact-title em { font-style: italic; color: var(--accent); }
+  .contact-sub { font-size: 14px; color: rgba(255,255,255,0.5); font-weight: 300; }
+  .contact-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 8px;
+    padding: 10px 18px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(255,255,255,0.85); font-size: 13px;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .contact-link:hover { border-color: var(--accent); color: var(--white); }
+
+  /* FOOTER */
+  footer {
+    padding: 20px 48px;
+    display: flex; justify-content: space-between;
+    font-size: 12px; color: var(--muted);
+    border-top: 1px solid var(--border);
+    max-width: 100%;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 20px 48px; gap: 32px; }
+    section { padding: 48px 20px; }
+    .about-grid, .oliver-grid { grid-template-columns: 1fr; gap: 28px; }
+    .skills-grid, .ach-grid { grid-template-columns: 1fr 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .contact-bar { padding: 32px 20px; flex-direction: column; }
+    footer { padding: 16px 20px; flex-direction: column; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Rakshatha Murching</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#achievements">Impact</a>
+    <a href="#oliver">OLIVER Fit</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <div class="hero-eyebrow">Senior Product Marketing Manager · Bengaluru, India</div>
+    <h1 class="hero-name">
+      I build GTM engines<br>that <em>actually launch.</em>
+    </h1>
+    <p class="hero-desc">
+      9+ years turning complex B2B SaaS products into compelling market stories.
+      Currently leading end-to-end GTM strategy at Glomo — from positioning and ICP definition
+      to cross-functional launch coordination, performance reporting, and process improvement.
+      Deeply curious about AI and how it reshapes the way we market.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View my experience →</a>
+      <a href="https://www.linkedin.com/in/murching-rakshatha/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-card">
+    <div class="hero-card-label">By the numbers</div>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-val">9<span style="font-size:18px">+</span></div><div class="stat-lbl">Years experience</div></div>
+      <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">GTM functions built</div></div>
+      <div class="stat"><div class="stat-val">$2M<span style="font-size:16px">+</span></div><div class="stat-lbl">Ad spend managed</div></div>
+      <div class="stat"><div class="stat-val">25<span style="font-size:16px">%</span></div><div class="stat-lbl">Avg performance lift</div></div>
+    </div>
+    <div class="hero-card-label">Core expertise</div>
+    <div class="tag-wrap">
+      <span class="tag">360° GTM</span>
+      <span class="tag">Program Management</span>
+      <span class="tag">Positioning</span>
+      <span class="tag">Sales Enablement</span>
+      <span class="tag">B2B SaaS</span>
+      <span class="tag">AI Tools</span>
+      <span class="tag">Fintech</span>
+      <span class="tag">Cross-functional</span>
+    </div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About me</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>I'm a <strong>product marketing manager and GTM strategist</strong> with 9+ years of experience across B2B SaaS, fintech, and enterprise technology. I've built marketing functions from scratch, launched products across new markets, and coordinated complex cross-functional campaigns — all with a bias for clarity, speed, and measurable outcomes.</p>
+      <p>At <strong>Glomo</strong>, I serve as the central point of contact for all go-to-market execution — owning positioning, messaging, launch coordination, stakeholder communication, and post-launch analysis. Before that, I spent 5+ years at <strong>Yahoo</strong> managing enterprise advertising operations for global fintech and e-commerce clients.</p>
+      <p>I'm passionate about <strong>AI and how it's reshaping marketing</strong> — I use Claude, ChatGPT, and Jasper daily for content generation, campaign optimisation, and workflow automation. I believe the best marketers right now are the ones who know how to work with AI, not around it.</p>
+    </div>
+    <div class="about-highlights">
+      <div class="highlight-row">
+        <div class="highlight-icon">🎯</div>
+        <div class="highlight-text">
+          <strong>GTM program management</strong>
+          End-to-end ownership of product launches — from 360° planning to post-launch analysis, risk mitigation, and retrospectives
+        </div>
+      </div>
+      <div class="highlight-row">
+        <div class="highlight-icon">🤝</div>
+        <div class="highlight-text">
+          <strong>Cross-functional coordination</strong>
+          Central POC across product, sales, design, and leadership — aligning teams, resolving dependencies, keeping programmes on track
+        </div>
+      </div>
+      <div class="highlight-row">
+        <div class="highlight-icon">📊</div>
+        <div class="highlight-text">
+          <strong>Data-driven storytelling</strong>
+          Skilled at compiling analysis across varied datasets and building compelling presentation decks for senior stakeholders
+        </div>
+      </div>
+      <div class="highlight-row">
+        <div class="highlight-icon">🤖</div>
+        <div class="highlight-text">
+          <strong>AI-powered marketing</strong>
+          Hands-on daily user of Claude, ChatGPT, Figma, and Framer — building faster, smarter marketing workflows
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Work experience</h2>
+  </div>
+  <div class="exp-grid">
+
+    <div class="exp-item">
+      <div class="exp-dates">
+        <strong>Current</strong>
+        Jan 2026 — Present<br>
+        <span style="font-size:11px;margin-top:6px;display:block;color:#C8943A;font-weight:500;">Fintech · B2B SaaS</span>
+      </div>
+      <div>
+        <div class="exp-role">Marketing Lead</div>
+        <div class="exp-company">Glomo — Cross-border Payments, Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Central POC for all GTM strategy — 360° planning, cross-functional coordination, and flawless launch execution for MSME exporters and banking partners</li>
+          <li>Built end-to-end GTM programme management — risk mitigation, bottleneck resolution, stakeholder reporting, and post-launch analysis</li>
+          <li>Drove content, PR, and demand generation across LinkedIn, email, and social; authored press releases and secured media coverage</li>
+          <li>Launched webinar programme generating MQLs and pipeline contribution; led full website redesign aligned to buyer journey</li>
+          <li>Created presentation decks for narrative building and GTM storytelling for senior leadership and cross-functional teams</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dates">
+        <strong>Previous</strong>
+        May 2024 — Jan 2026
+        <span style="font-size:11px;margin-top:6px;display:block;color:#6B7280;">Automotive · Marketing</span>
+      </div>
+      <div>
+        <div class="exp-role">Marketing Coordinator</div>
+        <div class="exp-company">LKQ India Pvt Ltd, Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Owned employer branding content strategy for LKQ Europe and India — drove 25% improvement in talent attraction metrics</li>
+          <li>Managed end-to-end event marketing — trade shows, conferences, and merchandising across regional stakeholder networks</li>
+          <li>Launched LKQ India website; reported on campaign performance using analytics dashboards achieving 35%+ email open rates</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dates">
+        <strong>5+ years</strong>
+        Aug 2018 — Jan 2024
+        <span style="font-size:11px;margin-top:6px;display:block;color:#6B7280;">Enterprise SaaS · Fintech</span>
+      </div>
+      <div>
+        <div class="exp-role">Senior Technical Implementation Specialist</div>
+        <div class="exp-company">Yahoo Inc., Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Managed enterprise B2B SaaS advertising platform for global fintech and e-commerce clients across US, EU, and APAC — $2M+ annual ad spend</li>
+          <li>Built performance reporting frameworks in Looker and Tableau driving 25% improvement in campaign metrics</li>
+          <li>Created documentation, playbooks, and training programmes improving platform adoption and reducing onboarding time</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-dates">
+        <strong>Earlier</strong>
+        Aug 2016 — Dec 2017
+        <span style="font-size:11px;margin-top:6px;display:block;color:#6B7280;">Enterprise Tech</span>
+      </div>
+      <div>
+        <div class="exp-role">Technical Solutions Representative</div>
+        <div class="exp-company">Hewlett Packard Inc., Bengaluru</div>
+        <ul class="exp-bullets">
+          <li>Delivered enterprise technical support for B2B customers; created customer-facing documentation and knowledge base articles</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Skills & tools</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-title">GTM & Product Marketing</div>
+      <div class="skill-tags">
+        <span class="skill-tag">360° GTM Planning</span>
+        <span class="skill-tag">Positioning</span>
+        <span class="skill-tag">Messaging</span>
+        <span class="skill-tag">ICP Definition</span>
+        <span class="skill-tag">Buyer Personas</span>
+        <span class="skill-tag">Sales Enablement</span>
+        <span class="skill-tag">Competitive Analysis</span>
+        <span class="skill-tag">Product Launches</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Program Management</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">Asana</span>
+        <span class="skill-tag">Smartsheet</span>
+        <span class="skill-tag">Trello</span>
+        <span class="skill-tag">Risk Mitigation</span>
+        <span class="skill-tag">Stakeholder Comms</span>
+        <span class="skill-tag">Process Improvement</span>
+        <span class="skill-tag">Post-launch Analysis</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">AI & Design Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Claude</span>
+        <span class="skill-tag">ChatGPT</span>
+        <span class="skill-tag">Jasper</span>
+        <span class="skill-tag">Canva AI</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">Framer</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Analytics & Reporting</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Looker</span>
+        <span class="skill-tag">Tableau</span>
+        <span class="skill-tag">Google Analytics</span>
+        <span class="skill-tag">CRM Systems</span>
+        <span class="skill-tag">Marketing Automation</span>
+        <span class="skill-tag">Performance Reporting</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Content & Storytelling</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Presentation Decks</span>
+        <span class="skill-tag">Narrative Building</span>
+        <span class="skill-tag">PR & Media</span>
+        <span class="skill-tag">Blog & Case Studies</span>
+        <span class="skill-tag">SEO</span>
+        <span class="skill-tag">Webinars</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-title">Education</div>
+      <div class="skill-tags" style="flex-direction:column;gap:4px;">
+        <span class="skill-tag" style="border-radius:4px;">B.E. Electronics & Communication</span>
+        <span style="font-size:12px;color:var(--muted);padding:3px 9px;">Visvesvaraya Technological University, 2016</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Impact & achievements</h2>
+  </div>
+  <div class="ach-grid">
+    <div class="ach-card">
+      <div class="ach-val">25<span>%</span></div>
+      <div class="ach-desc">Improvement in talent attraction metrics through employer branding content strategy at LKQ India</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-val">25<span>%</span></div>
+      <div class="ach-desc">Improvement in campaign performance metrics through Looker & Tableau analytics at Yahoo</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-val">$2M<span>+</span></div>
+      <div class="ach-desc">Annual ad spend managed for global fintech and e-commerce enterprise clients at Yahoo</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-val">35<span>%+</span></div>
+      <div class="ach-desc">Email campaign open rates achieved through targeted nurture and onboarding sequences</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-val">0 <span style="font-size:18px">→</span> 1</div>
+      <div class="ach-desc">Built GTM function from zero at Glomo — positioning, PR, webinars, events, email, website, and demand generation</div>
+    </div>
+    <div class="ach-card">
+      <div class="ach-val">9<span>+ yrs</span></div>
+      <div class="ach-desc">Driving B2B SaaS marketing across fintech, enterprise tech, and automotive sectors globally</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- OLIVER FIT -->
+<section id="oliver">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Why I'm right for OLIVER</h2>
+  </div>
+  <div class="oliver-grid">
+    <div class="oliver-left">
+      <p>OLIVER builds <strong>bespoke in-house marketing ecosystems</strong> for brands globally — coordinating across complex teams, leveraging AI at every step, and delivering flawless, high-velocity launches. That's exactly what I do.</p>
+      <p>At Glomo, I serve as the <strong>central POC for all GTM execution</strong> — coordinating product, sales, and leadership to align teams, manage risk, and deliver on time. I've built the playbooks, the reporting frameworks, and the communication cadences that keep programmes on track.</p>
+      <p>I'm not just curious about AI — I <strong>use it every day</strong>. Claude, ChatGPT, Figma, Framer, Jasper — these are live tools in my workflow, not line items on a resume. OLIVER's AI-first mandate is something I'm already living.</p>
+    </div>
+    <div class="fit-list">
+      <div class="fit-item">
+        <div class="fit-check">✓</div>
+        <div class="fit-content">
+          <strong>9+ years GTM experience, in-house</strong>
+          <span>All experience in-house at Glomo, Yahoo, and LKQ — not agency. I know how to coordinate from inside the organisation.</span>
+        </div>
+      </div>
+      <div class="fit-item">
+        <div class="fit-check">✓</div>
+        <div class="fit-content">
+          <strong>Complex cross-functional programme management</strong>
+          <span>Central POC across product, sales, and leadership at Glomo. Risk identification, dependency management, milestone tracking.</span>
+        </div>
+      </div>
+      <div class="fit-item">
+        <div class="fit-check">✓</div>
+        <div class="fit-content">
+          <strong>Strong analytical skills & presentation decks</strong>
+          <span>Built reporting frameworks in Looker and Tableau. Skilled at synthesising data into structured stakeholder narratives.</span>
+        </div>
+      </div>
+      <div class="fit-item">
+        <div class="fit-check">✓</div>
+        <div class="fit-content">
+          <strong>Passion for AI & new technologies</strong>
+          <span>Daily user of Claude, ChatGPT, Jasper, Figma, Framer. I actively champion AI adoption in marketing workflows.</span>
+        </div>
+      </div>
+      <div class="fit-item">
+        <div class="fit-check">✓</div>
+        <div class="fit-content">
+          <strong>Jira, Asana, Smartsheet proficient</strong>
+          <span>All three tools listed in the JD are in my active toolkit for programme governance and task coordination.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-bar" id="contact">
+  <div class="contact-left">
+    <div class="contact-title">Let's build something <em>great.</em></div>
+    <div class="contact-sub">Open to Senior PMM opportunities · Bengaluru, India · Available immediately</div>
+  </div>
+  <div class="contact-links">
+    <a href="mailto:rakshathamurching@gmail.com" class="contact-link">✉ rakshathamurching@gmail.com</a>
+    <a href="https://www.linkedin.com/in/murching-rakshatha/" target="_blank" class="contact-link">↗ LinkedIn</a>
+    <a href="tel:+919738080905" class="contact-link">📞 +91 973 808 0905</a>
+    <a href="https://murching-rakshatha.github.io" target="_blank" class="contact-link">🌐 Portfolio</a>
+  </div>
+</div>
+
+<footer>
+  <span>© 2026 Rakshatha Murching · <a href="https://murching-rakshatha.github.io" style="color:var(--muted);text-decoration:none;">murching-rakshatha.github.io</a></span>
+  <span>Senior Product Marketing Manager · Bengaluru, India</span>
+</footer>
+
+<script>
+  // Scroll reveal for experience items
+  const items = document.querySelectorAll('.exp-item');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+      }
+    });
+  }, { threshold: 0.1 });
+  items.forEach(el => observer.observe(el));
+
+  // Smooth active nav
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 80) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--navy)' : '';
+    });
+  });
+</script>
+</body>
+</html>
